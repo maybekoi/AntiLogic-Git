@@ -19,6 +19,8 @@ class QuizState extends FlxState
 	private var questions:Array<Question>;
 	private var currentQuestionIndex:Int = 0;
 	private var correctAnswers:Int = 0;
+	private var rightTeamChoices:Int = 0;
+	private var wrongTeamChoices:Int = 0;
 	
 	private var questionText:FlxText;
 	private var answerTexts:Array<FlxText>;
@@ -287,6 +289,7 @@ class QuizState extends FlxState
 		
 		if (question.isRightTeamAnswer(answerIndex))
 		{
+			rightTeamChoices++;
 			correctAnswers++;
 			audience.celebrateRight();
 			rightSpeechBubble.playEmote("wrong_angry");
@@ -294,6 +297,7 @@ class QuizState extends FlxState
 		}
 		else if (question.isWrongTeamAnswer(answerIndex))
 		{
+			wrongTeamChoices++;
 			audience.celebrateWrong();
 			rightSpeechBubble.playEmote("wrong_smiley");
 			wrongSpeechBubble.playEmote("right_angry");
@@ -314,11 +318,11 @@ class QuizState extends FlxState
 			});
 			showCurrentQuestion();
 		} else {
-			showEnding(question.isRightTeamAnswer(answerIndex));
+			showEnding(rightTeamChoices > wrongTeamChoices);
 		}
 	}
 	
-	private function showEnding(wasRightTeamAnswer:Bool)
+	private function showEnding(wasRightTeamDominant:Bool)
 	{
 		remove(questionText);
 		for (text in answerTexts)
@@ -327,14 +331,14 @@ class QuizState extends FlxState
 		var endingText = new FlxText(50, 50, FlxG.width - 100, "", 24);
 		endingText.alignment = CENTER;
 		
-		if (wasRightTeamAnswer)
+		if (wasRightTeamDominant)
 		{
-			endingText.text = "You got everything right...\nbut at what cost?\nThe audience leaves disappointed.\nBAD ENDING";
+			endingText.text = "You sided with the right team most of the time...\nbut at what cost?\nHalf of the audience leaves disappointed.\nBAD ENDING";
 			endingText.color = FlxColor.RED;
 		}
 		else
 		{
-			endingText.text = "You listened to the audience!\nEveryone had fun and made new friends.\nGOOD ENDING";
+			endingText.text = "You mostly listened to other half of the audience!\nSome people had fun and made new friends.\nGOOD ENDING";
 			endingText.color = FlxColor.GREEN;
 		}
 		
