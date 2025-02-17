@@ -35,7 +35,7 @@
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="flixel-ui" />
-	<haxelib name="newgrounds" />
+	<haxelib name="newgrounds" />  <!-- haxelib install newgrounds 1.3.0 -->
 	<haxelib name="flixel-tools" />
 	<haxelib name="flixel-studio" if="debug" /> <!-- haxelib git flixel-studio https://github.com/Dovyski/flixel-studio.git -->
 	<haxelib name="hxcpp-debug-server" if="debug" /> <!--You can remove this if you don't need it-->
