@@ -3,7 +3,7 @@
 
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="AntiLogic" file="AntiLogic" main="Main" version="1.0.0" company="koimaybe" />
+	<app title="AntiLogic" file="AntiLogic" main="Main" version="1.0.0" company="maybekoi" />
 	<app preloader="flixel.system.FlxPreloader" />
 
 	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
@@ -28,13 +28,14 @@
 	<source path="source" />
 
 	<assets path="assets/fonts" embed='true'/>
-	<assets path="assets/" rename="assets" exclude="*.mp3"/>
+	<assets path="assets/" rename="assets"/>
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="flixel-ui" />
+	<haxelib name="newgrounds" />
 	<haxelib name="flixel-tools" />
 	<haxelib name="flixel-studio" if="debug" /> <!-- haxelib git flixel-studio https://github.com/Dovyski/flixel-studio.git -->
 	<haxelib name="hxcpp-debug-server" if="debug" /> <!--You can remove this if you don't need it-->
