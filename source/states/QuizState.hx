@@ -211,7 +211,7 @@ class QuizState extends FlxState
 	{
 		super.update(elapsed);
 		
-		if (FlxG.mouse.justPressed)
+		if (currentQuestionIndex < questions.length && FlxG.mouse.justPressed)
 		{
 			for (text in answerTexts)
 			{
@@ -223,15 +223,18 @@ class QuizState extends FlxState
 			}
 		}
 		
-		for (text in answerTexts)
+		if (currentQuestionIndex < questions.length)
 		{
-			if (FlxG.mouse.overlaps(text))
+			for (text in answerTexts)
 			{
-				text.color = FlxColor.GRAY;
-			}
-			else
-			{
-				text.color = FlxColor.BLACK;
+				if (FlxG.mouse.overlaps(text))
+				{
+					text.color = FlxColor.GRAY;
+				}
+				else
+				{
+					text.color = FlxColor.BLACK;
+				}
 			}
 		}
 		
