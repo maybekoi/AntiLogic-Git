@@ -18,7 +18,7 @@ import game.AchievementNotif;
 using StringTools;
 
 /**
- * stolen from fnf source code muhhaahahahsudojenrhuj
+ * stolen from fnf source code muhhaahahahsudojenrhuj, slightly modified by maybekoi
  */
 class Newgrounds
 {
