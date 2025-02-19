@@ -151,71 +151,72 @@ class QuizState extends FlxState
 				"Whats the closest planet to the sun?",
 				["Mercury", "Venus", "Earth", "Mars"],
 				0,
-				[3, 1, 2], // Wrong Team
-				[0] // Right Team
+				[0], // Right Team
+				[3, 1, 2] // Wrong Team
 			),
 			new Question(
 				"Finish the sentence: 'I am '",
 				["Him", "Human", "Alien", "God"],
 				0,
-				[0, 1, 2], // Wrong Team
-				[3] // Right Team
+				[3], // Right Team
+				[0, 1, 2] // Wrong Team
+
 			),
 			new Question(
 				"SDRAWKCAB NOITSEUQ SIHT REWSNA",
 				["K.O", "What?", "I do not understand", "Tennis Elbow"],
 				0,
-				[1, 2, 3], // Wrong Team
-				[0] // Right Team
+				[0], // Right Team
+				[1, 2, 3] // Wrong Team
 			),
 			new Question(
 				"What was this quiz coded in?",
 				["Javascript", "C#", "Java", "Haxe"],
 				0,
-				[0, 1, 2], // Wrong Team
-				[3] // Right Team
+				[3], // Right Team
+				[0, 1, 2] // Wrong Team
 			),
 			new Question(
 				"Who owns X.com?",
 				["Elon Musk", "Jack Ma", "Satoshi Nakamoto", "Tim Cook"],
 				0,
-				[1, 2, 3], // Wrong Team
-				[0] // Right Team
+				[0], // Right Team
+				[1, 2, 3] // Wrong Team
 			),
 			new Question(
 				"Is scratch and its forks for babies?",
 				["Yes", "Yes", "Yes", "No"],
 				0,
-				[3], // Wrong Team
-				[0, 1, 2] // Right Team
+				[0, 1, 2], // Right Team
+				[3] // Wrong Team
 			),
 			new Question(
 				"Finish the quote: 'Sonic's the name, ...'s my game! '",
 				["Chilidogs", "What??", "speed", "No"],
 				0,
-				[3], // Wrong Team
-				[0, 1, 2] // Right Team
+				[0, 1, 2], // Right Team
+				[3] // Wrong Team
 			),
 			new Question(
 				"What is the capital of France?",
 				["Paris", "London", "Berlin", "Madrid"],
 				0,
-				[1, 2, 3], // Wrong Team
-				[0] // Right Team
+				[0], // Right Team
+				[1, 2, 3] // Wrong Team
 			),
 			new Question(
 				"I can see you.",
 				["What?", "Liar!", "Oh...", "Okay"],
 				0,
-				[0, 1, 3], // Wrong Team
-				[2] // Right Team
+				[2], // Right Team
+				[0, 1, 3] // Wrong Team
 			),
 			new Question(
 				"Who made this game/quiz?",
 				["maybekoi", "idk lol", "Sega", "Nintendo"],
 				0,
-				[1, 2, 3], // Wrong Team
-				[0] // Right Team
+				[0], // Right Team
+				[1, 2, 3] // Wrong Team
 			),	
 		];
 	}
