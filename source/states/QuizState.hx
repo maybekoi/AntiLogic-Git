@@ -461,7 +461,7 @@ class QuizState extends FlxState
 			medalText.text = "Achievements: " + FlxG.save.data.unlockedMedals + "/2";
 			#end
 			
-			endingText.text = "You sided with the left team most of the time...\nbut at what cost?\nHalf of the audience leaves disappointed.\nBAD ENDING?...";
+			endingText.text = "You sided with the right team most of the time...\nbut at what cost?\nHalf of the audience leaves disappointed.\nBAD ENDING?...";
 			endingText.color = FlxColor.RED;
 		}
 		else
@@ -483,7 +483,7 @@ class QuizState extends FlxState
 			medalText.text = "Achievements: " + FlxG.save.data.unlockedMedals + "/2";
 			#end
 			
-			endingText.text = "You mostly listened to right team's answers!\nSome people had fun and made new friends.\nGOOD ENDING?...";
+			endingText.text = "You mostly listened to wrong team's answers!\nSome people had fun and made new friends.\nGOOD ENDING?...";
 			endingText.color = FlxColor.GREEN;
 		}
 		
