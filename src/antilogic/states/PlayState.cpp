@@ -1,12 +1,11 @@
 // PlayState.cpp
 #include "../src/antilogic/states/PlayState.h"
 #include <Engine.h>
-#include "../game/Question.h"
 #include <iostream>
 
 PlayState* PlayState::instance = nullptr;
 
-PlayState::PlayState() : bg(nullptr), questionText(nullptr), questionBox(nullptr) {
+PlayState::PlayState() : bg(nullptr), questionText(nullptr), questionBox(nullptr), audience(nullptr) {
     instance = this;
 }
 
@@ -34,6 +33,9 @@ void PlayState::setupUI() {
     questionText->setText("epic question here lol");
     questionText->setFormat("assets/fonts/vcr.ttf", 24, 0xFFFFFFFF);
     engine->addText(questionText);
+
+    audience = new Audience();
+    engine->addSprite(audience);
 }
 
 void PlayState::initializeQuestions() {
@@ -86,6 +88,9 @@ void PlayState::update(float deltaTime) {
     if (questionBox) {
         questionBox->update(deltaTime);
     }
+    if (audience) {
+        audience->update(deltaTime);
+    }
 }
 
 void PlayState::render() {
@@ -97,6 +102,9 @@ void PlayState::render() {
     }
     if (questionText) {
         questionText->render();
+    }
+    if (audience) {
+        audience->render();
     }
 }
 
@@ -112,5 +120,9 @@ void PlayState::destroy() {
     if (questionText) {
         delete questionText;
         questionText = nullptr;
+    }
+    if (audience) {
+        delete audience;
+        audience = nullptr;
     }
 }

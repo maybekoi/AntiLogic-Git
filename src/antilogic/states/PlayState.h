@@ -6,6 +6,7 @@
 #include <Text.h>
 #include "../game/Question.h"
 #include "../game/QuestionBox.h"
+#include "../game/Audience.h"
 #include <vector>
 
 class PlayState : public State {
@@ -28,4 +29,5 @@ private:
     std::vector<Question> questions;
     QuestionBox* questionBox;
     std::vector<Text*> answerTexts;
+    Audience* audience;
 };
