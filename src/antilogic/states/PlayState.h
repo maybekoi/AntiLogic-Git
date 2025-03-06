@@ -4,10 +4,10 @@
 #include <Sprite.h>
 #include <AnimatedSprite.h>
 #include <Text.h>
+#include <vector>
 #include "../game/Question.h"
 #include "../game/QuestionBox.h"
 #include "../game/Audience.h"
-#include <vector>
 
 class PlayState : public State {
 public:
@@ -30,4 +30,6 @@ private:
     QuestionBox* questionBox;
     std::vector<Text*> answerTexts;
     Audience* audience;
+    std::vector<float> answerTextPositionsX;
+    std::vector<float> answerTextPositionsY;
 };

@@ -34,6 +34,19 @@ void PlayState::setupUI() {
     questionText->setFormat("assets/fonts/vcr.ttf", 24, 0xFFFFFFFF);
     engine->addText(questionText);
 
+    answerTexts = std::vector<Text*>();
+    
+    answerTextPositionsX = {235.0f, 815.0f, 235.0f, 815.0f};
+    answerTextPositionsY = {190.0f, 190.0f, 512.5f, 512.5f};
+
+    for (int i = 0; i < 4; i++) {
+        Text* text = new Text(answerTextPositionsX[i], answerTextPositionsY[i], 200);
+        text->setText("answers here lol!");
+        text->setFormat("assets/fonts/vcr.ttf", 20, 0xFFFFFFFF);
+        engine->addText(text);
+        answerTexts.push_back(text);
+    }
+
     audience = new Audience();
     engine->addSprite(audience);
 }
@@ -106,6 +119,11 @@ void PlayState::render() {
     if (audience) {
         audience->render();
     }
+    for (Text* text : answerTexts) {
+        if (text) {
+            text->render();
+        }
+    }
 }
 
 void PlayState::destroy() {
@@ -125,4 +143,11 @@ void PlayState::destroy() {
         delete audience;
         audience = nullptr;
     }
+    for (Text* text : answerTexts) {
+        if (text) {
+            delete text;
+            text = nullptr;
+        }
+    }
+    answerTexts.clear();
 }
