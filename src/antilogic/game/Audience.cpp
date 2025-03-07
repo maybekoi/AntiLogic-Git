@@ -59,14 +59,12 @@ void Audience::render() {
 
 void Audience::celebrateRight() {
     for (auto member : rightTeam) {
-        member->playAnim("yay");
-        // todo: anim finish callback func for sprite system
+        member->playAnim("yay", true);
     }
 }
 
 void Audience::celebrateWrong() {
     for (auto member : wrongTeam) {
-        member->playAnim("yay");
-        // todo: anim finish callback func for sprite system
+        member->playAnim("yay", true);
     }
 }

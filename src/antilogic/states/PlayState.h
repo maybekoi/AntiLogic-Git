@@ -8,6 +8,7 @@
 #include "../game/Question.h"
 #include "../game/QuestionBox.h"
 #include "../game/Audience.h"
+#include "../game/SpeechBubble.h"
 
 class PlayState : public State {
 public:
@@ -21,15 +22,22 @@ public:
     void initializeQuestions();
     void setupUI();
     void showCurrentQuestion();
+    void onAnswerClick(int answerIndex);
+    void keyPressed(unsigned char key) override;
     static PlayState* instance;
 
 private:
     Sprite* bg;
     Text* questionText;
+    Text* credText;
     std::vector<Question> questions;
     QuestionBox* questionBox;
     std::vector<Text*> answerTexts;
     Audience* audience;
+    SpeechBubble* rightSpeechBubble;
+    SpeechBubble* wrongSpeechBubble;
     std::vector<float> answerTextPositionsX;
     std::vector<float> answerTextPositionsY;
+    int currentQuestionIndex;
+    bool canClick;
 };

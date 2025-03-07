@@ -13,6 +13,9 @@ public:
     void celebrateRight();
     void celebrateWrong();
 
+    const std::vector<AnimatedSprite*>& getRightTeam() const { return rightTeam; }
+    const std::vector<AnimatedSprite*>& getWrongTeam() const { return wrongTeam; }
+
 private:
     static const int MEMBERS_PER_TEAM = 3;
     static const int MEMBER_SPACING = 100;
