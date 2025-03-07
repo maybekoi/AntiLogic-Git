@@ -30,6 +30,7 @@ private:
     Sprite* bg;
     Text* questionText;
     Text* credText;
+    Text* endingText = nullptr;
     std::vector<Question> questions;
     QuestionBox* questionBox;
     std::vector<Text*> answerTexts;
@@ -39,5 +40,9 @@ private:
     std::vector<float> answerTextPositionsX;
     std::vector<float> answerTextPositionsY;
     int currentQuestionIndex;
-    bool canClick;
+    void showEnding(bool wasRightTeamDominant);
+    int rightTeamChoices = 0;
+    int wrongTeamChoices = 0;
+    int correctAnswers = 0;
+    bool isEnding = false;
 };

@@ -9,12 +9,16 @@ PlayState::PlayState()
     : bg(nullptr)
     , questionText(nullptr)
     , credText(nullptr)
+    , endingText(nullptr)
     , questionBox(nullptr)
     , audience(nullptr)
     , rightSpeechBubble(nullptr)
     , wrongSpeechBubble(nullptr)
     , currentQuestionIndex(0)
-    , canClick(true) {
+    , rightTeamChoices(0)
+    , wrongTeamChoices(0)
+    , correctAnswers(0)
+    , isEnding(false) {
     instance = this;
 }
 
@@ -37,7 +41,7 @@ void PlayState::setupUI() {
     bg->setPosition(0, 0);
     engine->addSprite(bg);
 
-    credText = new Text(1020, 0, 1180);
+    credText = new Text(0, 0, 1180);
     credText->setText(
     "Programmed by maybekoi\n"
     "Art by hubbabubbagym/codie\n"
@@ -193,29 +197,59 @@ void PlayState::initializeQuestions() {
     questions = newQuestions;
 }
 
-void PlayState::onAnswerClick(int answerIndex) {
-    if (!canClick) return;
+void PlayState::showEnding(bool wasRightTeamDominant) {
+    isEnding = true;
+    questionText->setVisible(false);
+    questionBox->setVisible(false);
+    for (auto text : answerTexts) {
+        text->setVisible(false);
+    }
+
+    endingText = new Text(390, 50, 1180);
     
-    canClick = false; 
-    
+    if (wasRightTeamDominant) {
+        endingText->setText(
+            "You sided with the right team most of the time...\n"
+            "but at what cost?\n"
+            "Half of the audience leaves disappointed.\n"
+            "BAD ENDING?..."
+        );
+        endingText->setFormat("assets/fonts/vcr.ttf", 24, 0xFF0000FF);
+    } else {
+        endingText->setText(
+            "You mostly listened to wrong team's answers!\n"
+            "Some people had fun and made new friends.\n"
+            "GOOD ENDING?..."
+        );
+        endingText->setFormat("assets/fonts/vcr.ttf", 24, 0x00FF00FF);
+    }
+
+    Engine* engine = Engine::getInstance();
+    engine->addText(endingText);
+}
+
+void PlayState::onAnswerClick(int answerIndex) {    
     rightSpeechBubble->setVisible(true);
     wrongSpeechBubble->setVisible(true);
     rightSpeechBubble->emoticon->setVisible(true);
     wrongSpeechBubble->emoticon->setVisible(true);
     
-    if (questions[currentQuestionIndex].isRightTeamAnswer(answerIndex)) {
+    Question& question = questions[currentQuestionIndex];
+    if (question.isRightTeamAnswer(answerIndex)) {
+        rightTeamChoices++;
+        correctAnswers++;
+        audience->celebrateRight();
         rightSpeechBubble->emoticon->emoticon->playAnim("wrong_angry");
         wrongSpeechBubble->emoticon->emoticon->playAnim("right_smiley");
-        audience->celebrateRight();
-    } else {
+    } else if (question.isWrongTeamAnswer(answerIndex)) {
+        wrongTeamChoices++;
+        audience->celebrateWrong();
         rightSpeechBubble->emoticon->emoticon->playAnim("wrong_smiley");
         wrongSpeechBubble->emoticon->emoticon->playAnim("right_angry");
-        audience->celebrateWrong();
     }
     
     Engine* engine = Engine::getInstance();
     engine->setTimeout([this]() {
-        canClick = true;
         rightSpeechBubble->setVisible(false);
         wrongSpeechBubble->setVisible(false);        
         for (auto member : audience->getRightTeam()) {
@@ -227,6 +261,8 @@ void PlayState::onAnswerClick(int answerIndex) {
         currentQuestionIndex++;
         if (currentQuestionIndex < questions.size()) {
             showCurrentQuestion();
+        } else {
+            showEnding(rightTeamChoices > wrongTeamChoices);
         }
     }, 1.5f);
 }
@@ -275,6 +311,9 @@ void PlayState::render() {
     if (credText) {
         credText->render();
     }
+    if (endingText) {
+        endingText->render();
+    }
 }
 
 void PlayState::destroy() {
@@ -308,14 +347,17 @@ void PlayState::destroy() {
         }
     }
     answerTexts.clear();
+    if (endingText) {
+        delete endingText;
+        endingText = nullptr;
+    }
 }
 
 void PlayState::keyPressed(unsigned char key) {
-    if (!canClick) return;
-    
-    int answerIndex = -1;
-    if (key >= '1' && key <= '4') {
-        answerIndex = key - '1';
-        onAnswerClick(answerIndex);
+    if (isEnding) return;
+
+    int keyNum = key - '0';
+    if (keyNum >= 1 && keyNum <= 4) {
+        onAnswerClick(keyNum - 1);
     }
 }
