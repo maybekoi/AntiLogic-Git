@@ -1,6 +1,5 @@
 #include <Engine.h>
 #include "../src/antilogic/states/PlayState.h"
-#include <GL/glut.h>
 #include <Discord.h>
 
 int main(int argc, char** argv) {
