@@ -1,5 +1,9 @@
 #include "Audience.h"
+#ifdef __MINGW32__ || defined(__SWITCH__)
+#include "engine/Engine.h"
+#else
 #include <Engine.h>
+#endif
 
 Audience::Audience() : Sprite() {
     Engine* engine = Engine::getInstance();

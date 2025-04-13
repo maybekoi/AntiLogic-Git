@@ -1,10 +1,20 @@
 // PlayState.h
 #pragma once
+#ifdef __MINGW32__ || defined(__SWITCH__)
+#include "engine/State.h"
+#include "engine/Sprite.h"
+#include "engine/AnimatedSprite.h"
+#include "engine/Text.h"
+#include "engine/vector"
+#include "engine/Input.h"
+#else
 #include <State.h>
 #include <Sprite.h>
 #include <AnimatedSprite.h>
 #include <Text.h>
 #include <vector>
+#include <Input.h>
+#endif
 #include "../game/Question.h"
 #include "../game/QuestionBox.h"
 #include "../game/Audience.h"
@@ -30,6 +40,9 @@ private:
     Sprite* bg;
     Text* questionText;
     Text* credText;
+    #ifdef __SWITCH__
+    Text* controlsText;
+    #endif
     Text* endingText = nullptr;
     std::vector<Question> questions;
     QuestionBox* questionBox;

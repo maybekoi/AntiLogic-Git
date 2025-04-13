@@ -1,5 +1,9 @@
 #include "Emoticon.h"
+#ifdef __MINGW32__ || defined(__SWITCH__)
+#include "engine/Engine.h"
+#else
 #include <Engine.h>
+#endif
 
 Emoticon::Emoticon(float x, float y) : Sprite() {
     Engine* engine = Engine::getInstance();

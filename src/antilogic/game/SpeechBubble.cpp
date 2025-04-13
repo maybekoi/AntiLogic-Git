@@ -1,5 +1,9 @@
 #include "SpeechBubble.h"
+#ifdef __MINGW32__ || defined(__SWITCH__)
+#include "engine/Engine.h"
+#else
 #include <Engine.h>
+#endif
 
 SpeechBubble::SpeechBubble(float x, float y) : Sprite() {
     Engine* engine = Engine::getInstance();

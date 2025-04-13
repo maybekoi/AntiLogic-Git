@@ -1,5 +1,9 @@
 #include "QuestionBox.h"
+#ifdef __MINGW32__ || defined(__SWITCH__)
+#include "engine/Engine.h"
+#else
 #include <Engine.h>
+#endif
 
 QuestionBox::QuestionBox(float x, float y) {
     Engine* engine = Engine::getInstance();

@@ -1,7 +1,22 @@
 // PlayState.cpp
+#ifdef __MINGW32__
+#include "../src/antilogic/states/PlayState.h"
+#include "engine/Engine.h"
+#include <iostream>
+#include "engine/Input.h"
+#elif defined(__SWITCH__)
+#include "../src/antilogic/states/PlayState.h"
+#include "engine/Engine.h"
+#include <iostream>
+#include "engine/Input.h"
+#include <switch.h>
+#else
 #include "../src/antilogic/states/PlayState.h"
 #include <Engine.h>
 #include <iostream>
+#include <Input.h>
+#include <Discord.h>
+#endif
 
 PlayState* PlayState::instance = nullptr;
 
@@ -49,6 +64,20 @@ void PlayState::setupUI() {
     "Powered by hamburger engine!");
     credText->setFormat("assets/fonts/vcr.ttf", 16, 0xFFFFFFFF);
     engine->addText(credText);
+
+    #ifdef __SWITCH__
+    controlsText = new Text(1100, 0, 1180);
+    controlsText->setText(
+    "Controller Controls:\n"
+    "A - Top Left\n"
+    "B - Top Right\n"
+    "X - Bottom Left\n"
+    "Y - Bottom Right\n"
+    "+ - Quit\n"
+    "- - Quit");
+    controlsText->setFormat("assets/fonts/vcr.ttf", 16, 0xFFFFFFFF);
+    engine->addText(controlsText);
+    #endif
 
     questionBox = new QuestionBox(50, 50);
     engine->addSprite(questionBox);
@@ -268,6 +297,21 @@ void PlayState::onAnswerClick(int answerIndex) {
 }
 
 void PlayState::update(float deltaTime) {
+    if (isEnding) return;
+
+    Input::UpdateKeyStates();
+    Input::UpdateControllerStates();
+
+    if (Input::isControllerButtonJustPressed(SDL_CONTROLLER_BUTTON_A)) {
+        onAnswerClick(0);
+    } else if (Input::isControllerButtonJustPressed(SDL_CONTROLLER_BUTTON_B)) {
+        onAnswerClick(1);
+    } else if (Input::isControllerButtonJustPressed(SDL_CONTROLLER_BUTTON_X)) {
+        onAnswerClick(2);
+    } else if (Input::isControllerButtonJustPressed(SDL_CONTROLLER_BUTTON_Y)) {
+        onAnswerClick(3);
+    }
+
     Engine* engine = Engine::getInstance();
     
     if (questionBox) {
@@ -314,6 +358,11 @@ void PlayState::render() {
     if (endingText) {
         endingText->render();
     }
+    #ifdef __SWITCH__
+    if (controlsText) {
+        controlsText->render();
+    }
+    #endif
 }
 
 void PlayState::destroy() {
