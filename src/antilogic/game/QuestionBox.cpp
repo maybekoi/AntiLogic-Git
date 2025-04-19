@@ -1,8 +1,8 @@
 #include "QuestionBox.h"
 #ifdef __MINGW32__ || defined(__SWITCH__)
-#include "engine/Engine.h"
+#include "../engine/core/Engine.h"
 #else
-#include <Engine.h>
+#include <core/Engine.h>
 #endif
 
 QuestionBox::QuestionBox(float x, float y) {

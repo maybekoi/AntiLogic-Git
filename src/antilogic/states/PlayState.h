@@ -1,19 +1,19 @@
 // PlayState.h
 #pragma once
 #ifdef __MINGW32__ || defined(__SWITCH__)
-#include "engine/State.h"
-#include "engine/Sprite.h"
-#include "engine/AnimatedSprite.h"
-#include "engine/Text.h"
-#include "engine/vector"
-#include "engine/Input.h"
-#else
-#include <State.h>
-#include <Sprite.h>
-#include <AnimatedSprite.h>
-#include <Text.h>
+#include "engine/core/State.h"
+#include "engine/graphics/Sprite.h"
+#include "engine/graphics/AnimatedSprite.h"
+#include "engine/graphics/Text.h"
 #include <vector>
-#include <Input.h>
+#include "engine/input/Input.h"
+#else
+#include <core/State.h>
+#include <graphics/Sprite.h>
+#include <graphics/AnimatedSprite.h>
+#include <graphics/Text.h>
+#include <vector>
+#include <input/Input.h>
 #endif
 #include "../game/Question.h"
 #include "../game/QuestionBox.h"

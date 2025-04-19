@@ -1,11 +1,11 @@
 #pragma once
 #ifdef __MINGW32__ || defined(__SWITCH__)
-#include "engine/Sprite.h"
-#include "engine/AnimatedSprite.h"
+#include "../engine/graphics/Sprite.h"
+#include "../engine/graphics/AnimatedSprite.h"
 #include <vector>
 #else
-#include <Engine.h>
-#include <AnimatedSprite.h>
+#include <graphics/Sprite.h>
+#include <graphics/AnimatedSprite.h>
 #include <vector>
 #endif
 #include "Emoticon.h"

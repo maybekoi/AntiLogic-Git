@@ -1,17 +1,17 @@
 #ifdef __MINGW32__
-#include "engine/Engine.h"
+#include "../engine/core/Engine.h"
 #include "../src/antilogic/states/PlayState.h"
-#include "engine/Input.h"
+#include "../engine/input/Input.h"
 #elif defined(__SWITCH__)
-#include "engine/Engine.h"
+#include "../engine/core/Engine.h"
 #include "../src/antilogic/states/PlayState.h"
-#include "engine/Input.h"
+#include "../engine/input/Input.h"
 #include <switch.h>
 #else
-#include <Engine.h>
+#include <core/Engine.h>
 #include "../src/antilogic/states/PlayState.h"
-#include <Input.h>
-#include <Discord.h>
+#include <input/Input.h>
+#include <utils/Discord.h>
 #endif
 
 int main(int argc, char** argv) {
@@ -30,11 +30,28 @@ int main(int argc, char** argv) {
     Discord::GetInstance().Update();
     #endif
     
-    Engine engine(1280, 720, "AntiLogic");
+    int width = 1280;
+    int height = 720;
+    int fps = 60;
+    bool debug = true;
+    Engine engine(width, height, "AntiLogic", fps);
+    engine.debugMode = debug;
     PlayState* initialState = new PlayState();
     engine.pushState(initialState);
     
+    #ifdef __SWITCH__
+    while (appletMainLoop()) {
+        Input::UpdateControllerStates();
+        if (Input::isControllerButtonPressed(SDL_CONTROLLER_BUTTON_BACK) || 
+            Input::isControllerButtonPressed(SDL_CONTROLLER_BUTTON_START)) {
+            engine.quit();
+            break;
+        }
+        engine.run();
+    }
+    #else
     engine.run();
+    #endif
     
     #ifdef __MINGW32__
     // nun

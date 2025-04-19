@@ -1,21 +1,21 @@
 // PlayState.cpp
 #ifdef __MINGW32__
 #include "../src/antilogic/states/PlayState.h"
-#include "engine/Engine.h"
+#include "../engine/core/Engine.h"
 #include <iostream>
-#include "engine/Input.h"
+#include "../engine/input/Input.h"
 #elif defined(__SWITCH__)
 #include "../src/antilogic/states/PlayState.h"
-#include "engine/Engine.h"
+#include "../engine/core/Engine.h"
 #include <iostream>
-#include "engine/Input.h"
+#include "../engine/input/Input.h"
 #include <switch.h>
 #else
 #include "../src/antilogic/states/PlayState.h"
-#include <Engine.h>
+#include <core/Engine.h>
 #include <iostream>
-#include <Input.h>
-#include <Discord.h>
+#include <input/Input.h>
+#include <utils/Discord.h>
 #endif
 
 PlayState* PlayState::instance = nullptr;
